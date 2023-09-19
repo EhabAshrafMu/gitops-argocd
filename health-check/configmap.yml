@@ -3,8 +3,16 @@ kind: ConfigMap
 metadata:
   name: moving-shapes-colors
 data:
+  resource.customizations.health.ConfigMap: |
+    hs = {}
+    hs.status = "Healthy"
+      if obj.data.TRIANGLE_COLOR == "white" then
+        hs.status = "Degraded"
+        hs.message = "Use a different COLOR for TRIANGLE"
+      end
+    return hs
   CIRCLE_COLOR: "pink"
   OVAL_COLOR: "lightgreen"
   SQUARE_COLOR: "orange"
-  TRIANGLE_COLOR: "red"   # use white to get a Degraded message in ArgoCD
+  TRIANGLE_COLOR: "white"   # use white to get a Degraded message in ArgoCD
   RECTANGLE_COLOR: "blue" 
