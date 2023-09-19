@@ -9,7 +9,8 @@ spec:
   project: default
 
   source:
-    repoURL: http://165.22.209.118:3000/siddharth/gitops-argocd.git
+    # repoURL: http://165.22.209.118:3000/siddharth/gitops-argocd.git
+    repoURL: https://github.com/Richardbmk/gitops-playground
     targetRevision: HEAD
     path: ./declarative/manifests/geocentric-model
    
