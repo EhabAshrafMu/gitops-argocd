@@ -72,3 +72,47 @@ kubectl apply -f declarative/mono-app/geocentric-app.yml -n argocd
 ```
 
 # App of Apps
+
+```
+kubectl apply -f declarative/multi-app/app-of-apps.yml -n argocd
+```
+
+# Deploy apps using HELM Chart
+```
+kubectl apply -f declarative/multi-app/app-of-apps.yml -n argocd
+```
+# Deploy apps using HELM Chart
+```
+argocd app create helm-random-shapes \
+  --repo https://github.com/Richardbmk/gitops-playground \
+  --path helm-chart \
+  --helm-set replicaCount=2 \
+  --helm-set color.circle=pink \
+  --helm-set color.square=violet \
+  --helm-set service.type=NodePort \
+  --dest-namespace default \
+  --dest-server https://kubernetes.default.svc
+
+argocd app create nginx \
+  --repo https://charts.bitnami.com/bitnami \
+  --helm-chart nginx \
+  --revision 12.0.3 \
+  --values-literal-file values.yaml \
+  --dest-namespace default \
+  --dest-server https://kubernetes.default.svc
+
+helm list
+```
+
+# Multi-cluster application deployment
+
+```
+kubectl config set-cluster prod --server=https://1.2.3.4 --certificate-authority=prod.crt
+kubectl config set-credentials admin --client-certificate=admin.crt --client-key=admin.key
+kubectl config set-context admin-prod --cluster=prod --user=admin --namespace=prod-app
+
+argocd cluster add admin-prod
+argocd cluster list
+
+kubectl describe secret cluster-1.2.3.4-9876543 -n argocd
+```
