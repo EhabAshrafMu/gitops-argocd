@@ -24,12 +24,16 @@ kubectl get appproj -n argocd
 ```
 
 # Reconciliation loop
-$ kubectl describe pod argocd-repo-server -n argocd 
-$ kubectl describe pod argocd-repo-server -n argocd | grep -i "ARGOCD_RECONCILIATION_TIMEOUT:" -B1 
-$ kubectl patch configmap argocd-cm -n argocd --patch='{"data":{"timeout.reconciliation":"300s"}}'
+
+```
+kubectl describe pod argocd-repo-server -n argocd 
+kubectl describe pod argocd-repo-server -n argocd | grep -i "ARGOCD_RECONCILIATION_TIMEOUT:" -B1 
+kubectl patch configmap argocd-cm -n argocd --patch='{"data":{"timeout.reconciliation":"300s"}}'
+```
 
 # Application Custom Health Check
->> argocd-cm 
+
+
 ```
 # Please edit the object below. Lines beginning with a '#' will be ignored,
 # and an empty file will abort the edit. If an error occurs while saving this file will be
@@ -59,3 +63,12 @@ metadata:
   resourceVersion: "43188"
   uid: 268fa256-0400-48ea-8d71-c909fe7f72eb
 ```
+
+
+# Declarative Setup – Mono Application
+
+```
+kubectl apply -f declarative/mono-app/geocentric-app.yml -n argocd
+```
+
+# App of Apps
