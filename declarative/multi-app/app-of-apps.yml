@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/Richardbmk/gitops-playground
+    repoURL: https://github.com/EhabAshrafMu/gitops-argocd
     targetRevision: HEAD
     path: ./declarative/app-of-apps
   destination:
